@@ -46,15 +46,16 @@ def ats():
     fu = st.file_uploader(label='upload your resume to get the ats score', type='pdf')
 
     if fu:
-        reader=pdf.PdfReader(fu)
-        text=""
-        for page in range(len(reader.pages)):
-            page=reader.pages[page]
-            text+=str(page.extract_text())
+        with st.status('Processing your resume...'):
+            reader=pdf.PdfReader(fu)
+            text=""
+            for page in range(len(reader.pages)):
+                page=reader.pages[page]
+                text+=str(page.extract_text())
 
-        prompt = PromptTemplate(template=prompt_template, input_variables=[text, JD])
-        output_parser=StrOutputParser()
+            prompt = PromptTemplate(template=prompt_template, input_variables=[text, JD])
+            output_parser=StrOutputParser()
 
-        chain  = prompt|llm|output_parser
-        response = chain.invoke({'text':text, 'JD':JD})
+            chain  = prompt|llm|output_parser
+            response = chain.invoke({'text':text, 'JD':JD})
         st.write(response)
