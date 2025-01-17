@@ -6,11 +6,13 @@ import os
 from dotenv import load_dotenv
 from langchain_core.output_parsers import StrOutputParser
 
-load_dotenv()
-## load the GROQ API Key
-os.environ['GROQ_API_KEY']=os.getenv("GROQ_API_KEY")
+# load_dotenv()
+# ## load the GROQ API Key
+# os.environ['GROQ_API_KEY']=os.getenv("GROQ_API_KEY")
 
-groq_api_key=os.getenv("GROQ_API_KEY")
+# groq_api_key=os.getenv("GROQ_API_KEY")
+
+groq_api_key = st.secrets['API_KEYS'].get("GROQ_API_KEY", 'no api key found')
 
 llm=ChatGroq(groq_api_key=groq_api_key,model_name="gemma2-9b-it")
 
