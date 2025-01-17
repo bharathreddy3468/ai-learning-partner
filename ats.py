@@ -57,4 +57,4 @@ def ats():
 
         chain  = prompt|llm|output_parser
         response = chain.invoke({'text':text, 'JD':JD})
-        st.write(response)
+        st.write_stream(response)
