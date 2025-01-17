@@ -1,0 +1,8 @@
+.env
+grqo_bot.py
+resume.txt
+test.py
+interview.jpg
+.vscode
+__pycache__/
+pyvenv/

@@ -1,0 +1,12 @@
+langchain
+langchain_groq
+langchain_community
+torch
+pypdf
+faiss-cpu
+langchain_huggingface
+streamlit
+streamlit_chat
+streamlit_option_menu
+pypdf2
+
