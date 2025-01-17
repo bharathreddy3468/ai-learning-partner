@@ -45,4 +45,4 @@ if selected=='Home':
         st.session_state.chat_history.extend([HumanMessage(query.strip()), AIMessage(chatbot_response)])
         # Display bot message
         with st.chat_message("assistant"):
-            st.write_stream(chatbot_response)
+            st.write(chatbot_response)
