@@ -1,16 +1,19 @@
 import os
+import streamlit as st
 from langchain_groq import ChatGroq
 from langchain_core.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from langchain_core.output_parsers import StrOutputParser
 
 
-from dotenv import load_dotenv
-load_dotenv()
+# from dotenv import load_dotenv
+# load_dotenv()
 ## load the GROQ API Key
-os.environ['GROQ_API_KEY']=os.getenv("GROQ_API_KEY")
+# os.environ['GROQ_API_KEY']=os.getenv("GROQ_API_KEY")
 
-groq_api_key=os.getenv("GROQ_API_KEY")
+# groq_api_key=os.getenv("GROQ_API_KEY")
+
+groq_api_key=st.secrets['API_KEYS'].get("GROQ_API_KEY", 'no api key found')
 
 llm=ChatGroq(groq_api_key=groq_api_key,model_name="Llama3-70b-8192")
 
@@ -43,9 +46,8 @@ def generate_response(query, chat_history):
     return response['text']
 
 # Example usage
-# response = generate_response(
-#     role="Data Scientist",
-#     query="What is data science?",
-#     chat_history="",
-# )
-# print(response['text'])
+response = generate_response(
+    query="What is data science?",
+    chat_history="",
+)
+print(response)

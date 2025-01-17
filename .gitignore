@@ -6,3 +6,5 @@ interview.jpg
 .vscode
 __pycache__/
 pyvenv/
+secrets.toml
+.streamlit/
