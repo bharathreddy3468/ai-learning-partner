@@ -4,6 +4,7 @@ from groq_bot_ import generate_response
 from langchain_core.messages import AIMessage,HumanMessage
 from streamlit_option_menu import option_menu
 from ats import ats
+from mi_chatapp import mock_interview
 
 st.set_page_config(layout="wide")
 
@@ -11,15 +12,17 @@ st.set_page_config(layout="wide")
 with st.sidebar:
     selected = option_menu(
         menu_title= "Main menu",
-        options=['AI Tutor','ATS checker'],
+        options=['AI Tutor','ATS checker', 'Mock Interview'],
         default_index=0
     )
 
 if selected == 'ATS checker':
     ats()
 
+elif selected == 'Mock Interview':
+    mock_interview()
 
-if selected=='AI Tutor':
+else :
 # Initialize chat history
     if "messages" not in st.session_state:
         st.session_state.messages = []

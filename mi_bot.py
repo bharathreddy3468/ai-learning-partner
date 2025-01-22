@@ -47,11 +47,11 @@ prompt = PromptTemplate.from_template(template=prompt_template)
 chain = prompt|llm|StrOutputParser()
 
 # Function to generate response
-def generate_response(answer, chat_history, resume):
+def generate_response(answer, chat_history_mi, resume_mi):
     inputs = {
         "answer": answer,
-        "chat_history": chat_history,
-        "resume":resume
+        "chat_history": chat_history_mi,
+        "resume":resume_mi
     }
     response = chain.invoke(inputs)
     return response
