@@ -39,7 +39,6 @@ missing key words:
 Overall Score:
 """
 
-
 def ats():
     st.title('ATS checker')
     JD = st.text_area(label='Provide your Job description')
@@ -58,4 +57,4 @@ def ats():
 
             chain  = prompt|llm|output_parser
             response = chain.invoke({'text':text, 'JD':JD})
-        st.write(response)
+        st.markdown(response)

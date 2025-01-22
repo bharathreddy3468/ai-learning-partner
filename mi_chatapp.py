@@ -1,30 +1,27 @@
 import streamlit as st
 from streamlit_chat import message
-from groq_bot_ import generate_response
 from langchain_core.messages import AIMessage,HumanMessage
-from streamlit_option_menu import option_menu
-from ats import ats
-
-st.set_page_config(layout="wide")
+from mi_bot import generate_response
+import PyPDF2 as pdf
 
 
-with st.sidebar:
-    selected = option_menu(
-        menu_title= "Main menu",
-        options=['AI Tutor','ATS checker'],
-        default_index=0
-    )
 
-if selected == 'ATS checker':
-    ats()
+fu = st.file_uploader(label='upload your resume to get the ats score', type='pdf')
 
+if not fu:
+    st.error('Please upload your resume.')
+else:
+    with st.success('Resume uploaded'):
+        reader=pdf.PdfReader(fu)
+        resume=""
+        for page in range(len(reader.pages)):
+            page=reader.pages[page]
+            resume+=str(page.extract_text())
 
-if selected=='AI Tutor':
-# Initialize chat history
     if "messages" not in st.session_state:
         st.session_state.messages = []
         st.session_state.chat_history = []
-    
+
 
     # Display chat messages from history
     for message in st.session_state.messages:
@@ -32,7 +29,7 @@ if selected=='AI Tutor':
             st.markdown(message["content"])
         
     # Get user input
-    query = st.chat_input("Your message")
+    query = st.chat_input("Say Hello to start your interview")
 
     if query:
         # Add user message to chat history
@@ -41,7 +38,7 @@ if selected=='AI Tutor':
         with st.chat_message("user"):
             st.markdown(query)
 
-        chatbot_response = generate_response(query=query, chat_history=st.session_state.chat_history)
+        chatbot_response = generate_response(answer=query, chat_history=st.session_state.chat_history, resume=resume)
         # Add bot message to chat history
         st.session_state.messages.append({"role": "assistant", "content": chatbot_response})
         st.session_state.chat_history.extend([HumanMessage(query.strip()), AIMessage(chatbot_response)])

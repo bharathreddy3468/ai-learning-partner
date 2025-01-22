@@ -34,7 +34,8 @@ prompt = PromptTemplate.from_template(template=prompt_template)
 # Initialize the LLM (replace with your LLM provider and configuration)
 
 # Create the chain
-chain = LLMChain(prompt=prompt, llm=llm)
+# chain = LLMChain(prompt=prompt, llm=llm)
+chain = prompt|llm|StrOutputParser()
 
 # Function to generate response
 def generate_response(query, chat_history):
@@ -43,11 +44,11 @@ def generate_response(query, chat_history):
         "chat_history": chat_history,
     }
     response = chain.invoke(inputs)
-    return response['text']
+    return response
 
 # Example usage
-response = generate_response(
-    query="What is data science?",
-    chat_history="",
-)
-print(response)
+# response = generate_response(
+#     query="What is data science?",
+#     chat_history="",
+# )
+# print(response)
