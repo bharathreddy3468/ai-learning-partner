@@ -4,14 +4,21 @@ from langchain_core.messages import AIMessage,HumanMessage
 from mi_bot import generate_response
 import PyPDF2 as pdf
 
+@st.dialog('Instructions')
+def msg():
+    st.write('Please upload your resume in PDF format.')
+    st.write('Say hello to begin the interview.')
+    st.write('Say Give me the final report at the end of the answer to end the interview.')
+
 
 def mock_interview():
+    msg()
     fu_mi = st.file_uploader(label='upload your resume', type='pdf')
 
     if not fu_mi:
-        st.error('Please upload your resume.')
+        st.error('Please upload your resume in pdf format.')
     else:
-        with st.success('Resume uploaded'):
+        with st.success('Resume uploaded. Please say hello to begin the interview.'):
             reader_mi=pdf.PdfReader(fu_mi)
             resume_mi=""
             for page in range(len(reader_mi.pages)):
