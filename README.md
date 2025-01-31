@@ -19,3 +19,4 @@ This project represents my passion for bridging the gap between AI and human pot
 I’m thrilled to continue exploring the possibilities of AI, and I’d love to hear your thoughts on this project! 😊
 
 👉 Check it out or connect to learn more
+Demo : https://ai-learning-partner.streamlit.app/
